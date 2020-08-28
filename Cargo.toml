@@ -1,0 +1,33 @@
+[package]
+name = "plm"
+version = "0.1.0"
+authors = ["James Willcox <snorp@snorp.net>"]
+edition = "2018"
+readme="README.md"
+
+[dependencies]
+bytes = "0.5.6"
+nom = "5.1.2"
+bitflags = "1.2.1"
+log = "0.4.11"
+futures = "0.3.5"
+tokio-serial = "4.3.3"
+thiserror = "1.0.20"
+anyhow = "1.0.32"
+pretty_env_logger = "0.4.0"
+structopt = "0.3.17"
+lazy_static = "1.4.0"
+futures-timer = "3.0.2"
+prettytable-rs = "0.8.0"
+
+[dependencies.tokio]
+version = "0.2.22"
+features = ["io-util", "fs", "macros", "time"]
+
+[dependencies.tokio-util]
+version = "0.3.1"
+features = ["codec"]
+
+[dependencies.async-std]
+version = "1.6.3"
+features = ["attributes"]
