@@ -112,8 +112,7 @@ impl From<AllLinkMode> for u8 {
 }
 
 bitflags! {
-    /// Represents the flags in a link record. Used in
-    /// [Frame::AllLinkRecord](enum.Frame.html#variant.AllLinkRecord).
+    /// Represents the link flags.
     pub struct AllLinkFlags: u8 {
         const IN_USE         = (1 << 7);
         /// When present, the modem is linked as a controller. If absent,
@@ -217,7 +216,7 @@ pub enum Frame {
         /// The extended data, which is device-specific.
         data: [u8; 14],
     },
-    /// Produced when a [Device](struct.Device.html) receives a standard INSTEON message.
+    /// Produced when a standard INSTEON message is received.
     StandardInsteonReceive {
         /// The `Address` of the device that sent the message.
         from: Address,
@@ -236,6 +235,7 @@ pub enum Frame {
         /// The value for cmd2
         cmd2: u8,
     },
+    /// Produced when an extended INSTEON message is received.
     ExtendedInsteonReceive {
         from: Address,
         to: Address,
@@ -246,10 +246,12 @@ pub enum Frame {
         cmd2: u8,
         data: [u8; 14],
     },
+    /// Puts the modem into linking mode
     StartAllLink {
         mode: AllLinkMode,
         group: u8,
     },
+    /// Exits linking mode
     CancelAllLink,
     AllLinkComplete(AllLinkComplete),
     GetFirstAllLinkRecord,
