@@ -12,7 +12,7 @@ There is a command line app included as a demo. Install it with:
 
 Turn on the device with address `22.33.44` via the modem on `/dev/ttyUSB0`
 
-`plm --path /dev/ttyUSB0 device on 22.33.44`
+`plm -d /dev/ttyUSB0 device on 22.33.44`
 
 *Copyright &copy; 2020 James Willcox <snorp@snorp.net>*
 

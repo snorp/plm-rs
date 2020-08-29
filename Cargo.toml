@@ -24,7 +24,7 @@ prettytable-rs = "0.8.0"
 
 [dependencies.tokio]
 version = "0.2.22"
-features = ["io-util", "fs", "macros", "time"]
+features = ["io-util", "fs", "macros", "time", "net", "dns"]
 
 [dependencies.tokio-util]
 version = "0.3.1"

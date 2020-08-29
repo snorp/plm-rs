@@ -9,14 +9,20 @@ use prettytable::{cell, format::FormatBuilder, row, table, Table};
 
 use log::debug;
 
+use tokio::net::TcpStream;
+
 use plm::*;
 
 #[derive(StructOpt, Debug)]
 #[structopt(name = "plm")]
 struct App {
     /// A path to a serial device with an INSTEON modem connected, e.g. /dev/ttyUSB0
-    #[structopt(short, long, parse(from_os_str))]
-    path: PathBuf,
+    #[structopt(short, long, parse(from_os_str), conflicts_with = "host", required_unless = "host")]
+    device: Option<PathBuf>,
+
+    /// A host to connect over TCP
+    #[structopt(short, long, conflicts_with = "device", required_unless = "device")]
+    host: Option<String>,
 
     #[structopt(subcommand)]
     command: AppCommand,
@@ -266,7 +272,7 @@ async fn handle_device_command(modem: &mut Modem, command: DeviceCommand) -> Res
     Ok(())
 }
 
-#[async_std::main]
+#[tokio::main]
 async fn main() -> anyhow::Result<()> {
     pretty_env_logger::init();
 
@@ -274,7 +280,12 @@ async fn main() -> anyhow::Result<()> {
 
     debug!("{:#?}", app);
 
-    let mut modem = Modem::from_path(app.path).with_context(|| "Failed to open modem")?;
+    let mut modem = if let Some(device) = app.device {
+        Modem::from_path(device).with_context(|| "Failed to open modem")?
+    } else {
+        let stream = TcpStream::connect(app.host.unwrap()).await.with_context(|| "Failed to connect")?;
+        Modem::new(stream)
+    };
 
     match app.command {
         AppCommand::Modem(ModemCommand::Info) => modem_info(&mut modem).await?,
