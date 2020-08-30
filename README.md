@@ -1,6 +1,6 @@
 ![License](http://img.shields.io/badge/license-MIT-lightgrey.svg)
-[![Crates.io](https://img.shields.io/crates/v/plm-rs.svg)](https://crates.io/crates/plm)
-[![Doc.rs](https://docs.rs/plm-rs/badge.svg)](https://docs.rs/crate/plm)
+[![Crates.io](https://img.shields.io/crates/v/plm.svg)](https://crates.io/crates/plm)
+[![Doc.rs](https://docs.rs/plm/badge.svg)](https://docs.rs/crate/plm)
 
 # plm
 
