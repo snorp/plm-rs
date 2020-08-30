@@ -1,6 +1,6 @@
 [package]
 name = "plm"
-version = "0.1.0"
+version = "0.1.1"
 description = "Interact with INSTEON home automation devices."
 authors = ["James Willcox <snorp@snorp.net>"]
 edition = "2018"
